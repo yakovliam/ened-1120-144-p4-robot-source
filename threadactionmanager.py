@@ -23,7 +23,6 @@ class ThreadActionManager:
         self.main_action()
 
         while not self.cancellation_token.is_cancelled:
-            wait(1000)
             pass
 
     def __do_dependent_action(self):
@@ -32,13 +31,16 @@ class ThreadActionManager:
 
     def start(self):
         while True:
+            wait(500)
+            self.cancellation_token = CancellationToken()
             _thread.start_new_thread(self.__do_dependent_action, ())
             self.__do_main_action()
             if not self.should_restart_after_end:
                 break
 
-
     def end(self):
+        if self.cancellation_token.is_cancelled:
+            return
         self.cancellation_token.cancel()
         self.callback()        
 

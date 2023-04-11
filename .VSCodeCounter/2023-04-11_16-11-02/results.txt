@@ -1,0 +1,33 @@
+Date : 2023-04-11 16:11:02
+Directory : /Users/jacobcohen/Desktop/software/ened/ened1120/python/project_4/final
+Total : 8 files,  252 codes, 77 comments, 93 blanks, all 422 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Python   |          7 |        250 |         77 |         91 |        418 |
+| Markdown |          1 |          2 |          0 |          2 |          4 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                           | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                              |          8 |        252 |         77 |         93 |        422 |
++------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                       | language | code       | comment    | blank      | total      |
++------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| /Users/jacobcohen/Desktop/software/ened/ened1120/python/project_4/final/README.md              | Markdown |          2 |          0 |          2 |          4 |
+| /Users/jacobcohen/Desktop/software/ened/ened1120/python/project_4/final/dountil.py             | Python   |         54 |          7 |         18 |         79 |
+| /Users/jacobcohen/Desktop/software/ened/ened1120/python/project_4/final/idgenerator.py         | Python   |          4 |          0 |          2 |          6 |
+| /Users/jacobcohen/Desktop/software/ened/ened1120/python/project_4/final/main.py                | Python   |          5 |         25 |         10 |         40 |
+| /Users/jacobcohen/Desktop/software/ened/ened1120/python/project_4/final/robot.py               | Python   |        119 |         23 |         34 |        176 |
+| /Users/jacobcohen/Desktop/software/ened/ened1120/python/project_4/final/robotutils.py          | Python   |         22 |         22 |         13 |         57 |
+| /Users/jacobcohen/Desktop/software/ened/ened1120/python/project_4/final/statetoken.py          | Python   |          9 |          0 |          4 |         13 |
+| /Users/jacobcohen/Desktop/software/ened/ened1120/python/project_4/final/threadactionmanager.py | Python   |         37 |          0 |         10 |         47 |
+| Total                                                                                          |          |        252 |         77 |         93 |        422 |
++------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
