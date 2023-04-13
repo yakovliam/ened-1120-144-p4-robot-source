@@ -3,37 +3,89 @@
 from robot import GreatRobotV1
 from pybricks.tools import wait
 from dountil import singleton_do_until as do_until
+import robotutils
+
+inp = ["C1_5", "3", "C"]
+
+absolute_coordinates = robotutils.coordinates.generate_stage1_coordinates(
+    inp
+)
+
+print(absolute_coordinates)
+
+relative_coordinates = robotutils.coordinates.adjust_coordinates_by_starting_position(absolute_coordinates)
+
+print(relative_coordinates)
+
+mm_coordinates = robotutils.coordinates.coordinate_to_mm(relative_coordinates)
+
+box_number = int(inp[0].split("_")[1])
+box_is_on_lower_side = box_number <= 6
+home = inp[2]
 
 robot = GreatRobotV1()
-robot.scan_barcode()
 
+robot.open_claw(percent=50)
 
+do_until.do(
+    lambda: robot.drive_straight(mm_coordinates[1] + 50),
+    blocking=True
+)
+do_until.do(
+    lambda: robot.turn_degrees(90),
+    blocking=True
+)
+do_until.do(
+    lambda: robot.drive_straight(mm_coordinates[0] + 200),
+    blocking=True
+)
 
-# # do_until.do_thread_until(
-# #     do_callable=lambda: robot.drive_straight(1000),
-# #     until_callable=lambda: robot.ultrasonic_sensor.distance() < 50,
-# #     callback=robot.stop_driving,
-# #     blocking=True
-# # )
-# robot.close_claw()
-# robot.open_claw()
-# robot.close_claw()
+do_until.do(
+    lambda: robot.turn_degrees(-90),
+    blocking=True
+)
 
-# while True:
-#     print(robot.color_sensor.color())
-#     wait(200)
+do_until.do(
+    lambda: robot.drive_straight(12 * 25.4),
+    blocking=True
+)
 
+robot.close_claw()
+robot.scan_barcode(target="2")
 
-# BARCODE DETECTION PSUDEOCODE
-# background: color sensor angle and claw angle are tethered, so when the claw is open, the color sensor is up 100%, and when the claw is closed, the color sensor is down 100%
-# Color sensor starts down (claw closed), and it moves up slowly (claw open)
-# A "Barcode" is blocks of white and black, so when the color sensor is over a white block, it will see white, and when it is over a black block, it will see black
-# A barcode always starts with a black block, and there are 4 blocks total
+do_until.do(
+    lambda: robot.drive_straight(-1 * 6 * 25.4),
+    blocking=True
+)
 
-# 1. Start with the claw closed, and the color sensor down
-# 2. Open the claw slowly, and move the color sensor up with it
-# 3. When the color sensor sees black, that's the start of the barcode
-# 4. Figure out the seconds per each block on the barcode
-# 5. Move the claw and color sensor 4 blocks (4 * x seconds per block)
-# 6. Close the claw
-# 7. Save the data to an array of size 4
+do_until.do(
+    lambda: robot.turn_degrees(-90),
+    blocking=True
+)
+
+robot.close_claw()
+
+home_coords = None
+
+if home == "B":
+    home = robotutils.coordinates.home_b_coordinates()
+elif home == "C":
+    home = robotutils.coordinates.home_c_coordinates()
+elif home == "D":
+    home = robotutils.coordinates.home_d_coordinates()
+else:
+    home = robotutils.coordinates.home_a_coordinates()
+
+home_coords = robotutils.coordinates.adjust_coordinates_by_starting_position(home)
+home_mm = robotutils.coordinates.coordinate_to_mm(home_coords)
+
+# drive to the home
+do_until.do(
+    lambda: robot.drive_straight(abs(abs(home_mm[1]) - abs(mm_coordinates[1])) - 12),
+    blocking=True
+)
+
+from party import party
+party(robot)
+
+wait(10000)
